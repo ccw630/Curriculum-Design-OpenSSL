@@ -49,18 +49,22 @@ class PostHandler(BaseHTTPRequestHandler):
 		try:
 			signature = base64.b64decode(form['signMsg'].value)
 			OpenSSL.crypto.verify(certificate, signature, 'true data\n', 'sha1')
-			self.wfile.write(b'ICBC has acquired your transaction, please check whether our server received response from ICBC in terminal.')
-			s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-			ip = form['merURL'].value.split(':')[0]
-			port = int(form['merURL'].value.split(':')[1].replace('/','')) if ':' in form['merURL'].value else 8080
-			ssl_s = ssl.wrap_socket(s, cert_reqs=ssl.CERT_REQUIRED, ca_certs="ca.crt")
-			ssl_s.connect((ip, port))
-			print("Merchant Certificate Info")
-			pprint.pprint(ssl_s.getpeercert())
-			ssl_s.send(b'ICBC Transaction Acquired')
-			data = ssl_s.recv(1024)
-			print("Merchant Reply:", data.decode("utf-8") )
-			ssl_s.close()
+			try:
+				s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+				ip = form['merURL'].value.split(':')[0]
+				port = int(form['merURL'].value.split(':')[1].replace('/','')) if ':' in form['merURL'].value else 8080
+				ssl_s = ssl.wrap_socket(s, cert_reqs=ssl.CERT_REQUIRED, ca_certs="ca.crt")
+				ssl_s.connect((ip, port))
+				print("Merchant Certificate Info")
+				pprint.pprint(ssl_s.getpeercert())
+				ssl_s.send(b'ICBC Transaction Acquired')
+				self.wfile.write(b'ICBC has acquired your transaction, please check whether our server received response from ICBC in terminal.')
+				data = ssl_s.recv(1024)
+				print("Merchant Reply:", data.decode("utf-8") )
+				ssl_s.close()
+			except:
+				traceback.print_exc()
+				self.wfile.write(b'Connection Error.')
 		except:
 			traceback.print_exc()
 			self.wfile.write(b'ICBC did not accept your transaction due to wrong signature or certification.')
