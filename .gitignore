@@ -1,0 +1,12 @@
+*.key
+*.crt
+*.csr
+*.srl
+
+server
+client
+data
+tmp.sha1
+signature
+
+clean.sh
