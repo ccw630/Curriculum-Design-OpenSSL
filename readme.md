@@ -40,7 +40,7 @@ Note: The pass phrase for `server.key` is `1111`
 
 ## Safe Online Paying Demo
 
-## Background
+### Background
 
 Here's an old(before 2010?) ICBC pay API.
 ```html
@@ -48,7 +48,7 @@ Here's an old(before 2010?) ICBC pay API.
 <input type="text" name="merchantid" value="020000010001" >    --商城代码  
 <input type="text" name="interfaceType" value="HS" >  --接口类型 
 <input type="text" name="merURL" value="http://www.icbc_mert.com/toIcbcPay.asp" >  --接收支付结果信息的程序名称和地址  
-<input type="text" name="orderid" value="12345678912345" >  --订单号 
+<input type="text" name="orderid" values="12345678912345" >  --订单号 
 <input type="text" name="amount" value="10056" >   --订单总金额（以分为单位） 
 <input type="text" name="curType" value="001" >   --币种  
 <input type="text" name="hsmsgType" value="0" >   --信息发送类型  
