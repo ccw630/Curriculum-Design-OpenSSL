@@ -47,9 +47,7 @@ Here's an old(before 2010?) ICBC pay API.
 <form name=" sendOrder " method="post" action="http://某网上银行支付服务器IP地址 / servlet/com.MerPayReqServlet ">  
 <input type="text" name="merchantid" value="020000010001" >    --商城代码  
 <input type="text" name="interfaceType" value="HS" >  --接口类型 
-<input type="text" name="merURL" 
-value="http://www.icbc_mert.com/toIcbcPay.asp" >
- --接收支付结果信息的程序名称和地址  
+<input type="text" name="merURL" value="http://www.icbc_mert.com/toIcbcPay.asp" >  --接收支付结果信息的程序名称和地址  
 <input type="text" name="orderid" value="12345678912345" >  --订单号 
 <input type="text" name="amount" value="10056" >   --订单总金额（以分为单位） 
 <input type="text" name="curType" value="001" >   --币种  
